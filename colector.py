@@ -11,7 +11,7 @@ def price(quote):
     text = request[end:limit]
     counter = match('.+([0-9])[^0-9]*$', text)
     numEnd = counter.start(1) + 1
-    return text[:numEnd]
+    return float(text[:numEnd].replace(',', ''))
 
 # Test input.
 input = input(str('Type the code that comes after "https://www.google.com/finance/quote/": '))
