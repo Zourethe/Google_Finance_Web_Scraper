@@ -1,14 +1,18 @@
 # Imports.
-import requests
+from requests import get
+from re import match
 
-def price(code):
-    request = requests.get('https://www.google.com/finance/quote/{}'.format(code)).text
-    posStart = request.find('YMlKec fxKbKc')
-    posEnd = posStart + 13
-    
-    print(request[posStart:posEnd])
+# Price function.
+def price(quote):
+    request = get('https://www.google.com/finance/quote/{}'.format(quote)).text
+    start = request.find('YMlKec fxKbKc')
+    end = start + 15
+    limit = end + 100
+    text = request[end:limit]
+    counter = match('.+([0-9])[^0-9]*$', text)
+    numEnd = counter.start(1) + 1
+    return text[:numEnd]
 
-
-codeA = input(str('Type the code that comes after "https://www.google.com/finance/quote/": '))
-price(codeA)
-
+# Test input.
+input = input(str('Type the code that comes after "https://www.google.com/finance/quote/": '))
+print(price(input))
