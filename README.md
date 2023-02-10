@@ -1,4 +1,4 @@
-# Google Finance API
+# Google Finance Web Scraper
 
 This is a python module that return quotes information from Google Finance.
 
